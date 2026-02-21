@@ -149,14 +149,14 @@ func (f *PrettyFormatter) FormatPages(pages []models.Page) string {
 		id := truncate(p.ID, 20)
 		title := truncate(p.Title, 40)
 		status := p.Status
-		sb.WriteString(fmt.Sprintf("  %-20s  %-40s  %s\n",
+		fmt.Fprintf(&sb, "  %-20s  %-40s  %s\n",
 			cyan(id),
 			title,
 			statusBadge(status),
-		))
+		)
 	}
 
-	sb.WriteString(fmt.Sprintf("\n  %s\n\n", dim(fmt.Sprintf("%d page(s)", len(pages)))))
+	fmt.Fprintf(&sb, "\n  %s\n\n", dim(fmt.Sprintf("%d page(s)", len(pages))))
 	return sb.String()
 }
 
@@ -224,14 +224,14 @@ func (f *PrettyFormatter) FormatSpaces(spaces []models.Space) string {
 		key := truncate(s.Key, 12)
 		name := truncate(s.Name, 36)
 		typ := truncate(s.Type, 12)
-		sb.WriteString(fmt.Sprintf("  %-12s  %-36s  %-12s\n",
+		fmt.Fprintf(&sb, "  %-12s  %-36s  %-12s\n",
 			yellow(key),
 			name,
 			dim(typ),
-		))
+		)
 	}
 
-	sb.WriteString(fmt.Sprintf("\n  %s\n\n", dim(fmt.Sprintf("%d space(s)", len(spaces)))))
+	fmt.Fprintf(&sb, "\n  %s\n\n", dim(fmt.Sprintf("%d space(s)", len(spaces))))
 	return sb.String()
 }
 
@@ -261,16 +261,16 @@ func (f *PrettyFormatter) FormatSearchResults(results *models.SearchResult) stri
 		if title == "" {
 			title = entry.Content.Title
 		}
-		sb.WriteString(fmt.Sprintf("  %s %s\n", bold(cyan(fmt.Sprintf("[%d]", i+1))), bold(title)))
+		fmt.Fprintf(&sb, "  %s %s\n", bold(cyan(fmt.Sprintf("[%d]", i+1))), bold(title))
 
 		// Excerpt
 		if entry.Excerpt != "" {
-			sb.WriteString(fmt.Sprintf("      %s\n", dim(truncate(entry.Excerpt, 100))))
+			fmt.Fprintf(&sb, "      %s\n", dim(truncate(entry.Excerpt, 100)))
 		}
 
 		// Space
 		if entry.Content.Space != nil && entry.Content.Space.Key != "" {
-			sb.WriteString(fmt.Sprintf("      Space: %s\n", yellow(entry.Content.Space.Key+" — "+entry.Content.Space.Name)))
+			fmt.Fprintf(&sb, "      Space: %s\n", yellow(entry.Content.Space.Key+" — "+entry.Content.Space.Name))
 		}
 
 		// URL
@@ -279,7 +279,7 @@ func (f *PrettyFormatter) FormatSearchResults(results *models.SearchResult) stri
 			url = entry.Content.Links.WebUI
 		}
 		if url != "" {
-			sb.WriteString(fmt.Sprintf("      URL:   %s\n", blue(url)))
+			fmt.Fprintf(&sb, "      URL:   %s\n", blue(url))
 		}
 
 		sb.WriteString("\n")
@@ -337,15 +337,15 @@ func (f *PrettyFormatter) FormatAttachments(attachments []models.Attachment) str
 		mediaType = truncate(mediaType, 24)
 		size := humanFileSize(a.Extensions.FileSize)
 
-		sb.WriteString(fmt.Sprintf("  %-10s  %-36s  %-24s  %-10s\n",
+		fmt.Fprintf(&sb, "  %-10s  %-36s  %-24s  %-10s\n",
 			dim(id),
 			title,
 			dim(mediaType),
 			yellow(size),
-		))
+		)
 	}
 
-	sb.WriteString(fmt.Sprintf("\n  %s\n\n", dim(fmt.Sprintf("%d attachment(s)", len(attachments)))))
+	fmt.Fprintf(&sb, "\n  %s\n\n", dim(fmt.Sprintf("%d attachment(s)", len(attachments))))
 	return sb.String()
 }
 
@@ -396,9 +396,9 @@ func renderPrettyTree(sb *strings.Builder, node *models.PageTree, baseURL, prefi
 	titleStr := bold(node.Page.Title)
 	idStr := dim("(" + node.Page.ID + ")")
 	if url != "" {
-		sb.WriteString(fmt.Sprintf("%s%s%s %s  %s\n", prefix, connector, titleStr, idStr, blue(url)))
+		fmt.Fprintf(sb, "%s%s%s %s  %s\n", prefix, connector, titleStr, idStr, blue(url))
 	} else {
-		sb.WriteString(fmt.Sprintf("%s%s%s %s\n", prefix, connector, titleStr, idStr))
+		fmt.Fprintf(sb, "%s%s%s %s\n", prefix, connector, titleStr, idStr)
 	}
 
 	// Determine the prefix extension for children.

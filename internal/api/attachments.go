@@ -64,7 +64,7 @@ func (c *Client) UploadAttachment(ctx context.Context, pageID, filename string, 
 	if err != nil {
 		return nil, fmt.Errorf("execute upload request: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if err := checkResponse(resp); err != nil {
 		return nil, fmt.Errorf("upload attachment to page %s: %w", pageID, err)
@@ -93,7 +93,7 @@ func (c *Client) DownloadAttachment(ctx context.Context, downloadPath string, wr
 	if err != nil {
 		return fmt.Errorf("download attachment: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if err := checkResponse(resp); err != nil {
 		return fmt.Errorf("download attachment: %w", err)

@@ -1,0 +1,11 @@
+<h1 id="simple-page">Simple Page</h1>
+<p>This is a simple paragraph with some text.</p>
+<h2 id="features">Features</h2>
+<p>Here is a list of features:</p>
+<ul>
+<li>First item</li>
+<li>Second item</li>
+<li>Third item</li>
+</ul>
+<h2 id="links">Links</h2>
+<p>Visit <a href="https://confluence.example.com">Confluence</a> for documentation.</p>

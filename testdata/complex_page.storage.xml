@@ -1,0 +1,72 @@
+<h1 id="complex-page">Complex Page</h1>
+<p>A page demonstrating all supported Confluence storage format elements.</p>
+<h2 id="code-blocks">Code Blocks</h2>
+<p>Here is a Go code example:</p>
+<ac:structured-macro ac:name="code"><ac:parameter ac:name="language">go</ac:parameter><ac:plain-text-body><![CDATA[package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello, Confluence!")
+}
+]]></ac:plain-text-body></ac:structured-macro>
+<p>A plain code block with no language:</p>
+<ac:structured-macro ac:name="code"><ac:plain-text-body><![CDATA[plain text
+no language here
+]]></ac:plain-text-body></ac:structured-macro>
+<h2 id="tables">Tables</h2>
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Paradigm</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Go</td>
+<td>Compiled</td>
+<td>2009</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>Interpreted</td>
+<td>1991</td>
+</tr>
+<tr>
+<td>Rust</td>
+<td>Compiled</td>
+<td>2010</td>
+</tr>
+</tbody>
+</table>
+<h2 id="blockquotes">Blockquotes</h2>
+<blockquote>
+<p>This is an important note.
+It continues on the next line.</p>
+</blockquote>
+<h2 id="images">Images</h2>
+<p><ac:image ac:alt="Confluence Logo"><ri:url ri:value="https://confluence.example.com/logo.png" /></ac:image></p>
+<h2 id="nested-lists">Nested Lists</h2>
+<ul>
+<li>Top level item one
+<ul>
+<li>Nested item A</li>
+<li>Nested item B</li>
+</ul>
+</li>
+<li>Top level item two</li>
+</ul>
+<h2 id="ordered-list">Ordered List</h2>
+<ol>
+<li>First step</li>
+<li>Second step</li>
+<li>Third step</li>
+</ol>
+<h2 id="inline-formatting">Inline Formatting</h2>
+<p>This text has <strong>bold</strong>, <em>italic</em>, and <code>inline code</code> formatting.</p>
+<p>Also <del>strikethrough</del> text.</p>
+<h2 id="horizontal-rule">Horizontal Rule</h2>
+<hr />
+<p>End of complex page.</p>

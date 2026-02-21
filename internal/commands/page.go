@@ -296,7 +296,7 @@ var pageDeleteCmd = &cobra.Command{
 		if !pageDeleteForceFlag {
 			fmt.Fprintf(os.Stderr, "Delete page %s? [y/N]: ", pageID)
 			var answer string
-			fmt.Scanln(&answer)
+			_, _ = fmt.Scanln(&answer)
 			if answer != "y" && answer != "Y" {
 				fmt.Fprintln(os.Stderr, "Aborted.")
 				return nil

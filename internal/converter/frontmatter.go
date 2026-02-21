@@ -64,7 +64,7 @@ func ParseFrontmatter(content string) (*Frontmatter, string, error) {
 
 	// Split into lines to find the closing --- delimiter.
 	// The spec: opening "---" on its own line, then YAML, then closing "---" on its own line.
-	lines := strings.SplitN(content, "\n", -1)
+	lines := strings.Split(content, "\n")
 	if len(lines) < 2 {
 		// Just "---" with nothing after — treat as empty frontmatter.
 		return &Frontmatter{}, "", nil

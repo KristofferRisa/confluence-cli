@@ -32,7 +32,7 @@ var attachmentUploadCmd = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("open file %s: %w", filePath, err)
 		}
-		defer f.Close()
+		defer func() { _ = f.Close() }()
 
 		// Use only the base filename, not the full path, as the attachment name.
 		filename := filePath
@@ -131,7 +131,7 @@ var attachmentDownloadCmd = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("create output file %s: %w", outputPath, err)
 		}
-		defer outFile.Close()
+		defer func() { _ = outFile.Close() }()
 
 		if err := client.DownloadAttachment(ctx, downloadPath, outFile); err != nil {
 			// Remove partially written file on failure.

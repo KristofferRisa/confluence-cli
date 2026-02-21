@@ -2,7 +2,6 @@ package commands
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/kristofferrisa/confluence-cli/internal/config"
 	"github.com/kristofferrisa/confluence-cli/internal/output"
@@ -77,8 +76,3 @@ func init() {
 	rootCmd.PersistentFlags().StringVarP(&formatFlag, "format", "f", "", "output format: pretty, json, markdown")
 }
 
-// exitWithError prints an error message to stderr and exits with code 1.
-func exitWithError(format string, args ...interface{}) {
-	fmt.Fprintf(os.Stderr, "Error: "+format+"\n", args...)
-	os.Exit(1)
-}

@@ -86,7 +86,7 @@ func (c *Client) doJSON(ctx context.Context, method, url string, body, result in
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if err := checkResponse(resp); err != nil {
 		return err

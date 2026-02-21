@@ -58,30 +58,30 @@ func (f *MarkdownFormatter) FormatPage(page *models.Page) string {
 	sb.WriteString("# " + page.Title + "\n\n")
 	sb.WriteString("| Field | Value |\n")
 	sb.WriteString("| --- | --- |\n")
-	sb.WriteString(fmt.Sprintf("| ID | %s |\n", mdEscape(page.ID)))
-	sb.WriteString(fmt.Sprintf("| Status | %s |\n", mdEscape(page.Status)))
-	sb.WriteString(fmt.Sprintf("| Space ID | %s |\n", mdEscape(page.SpaceID)))
+	fmt.Fprintf(&sb, "| ID | %s |\n", mdEscape(page.ID))
+	fmt.Fprintf(&sb, "| Status | %s |\n", mdEscape(page.Status))
+	fmt.Fprintf(&sb, "| Space ID | %s |\n", mdEscape(page.SpaceID))
 
 	if page.ParentID != "" {
-		sb.WriteString(fmt.Sprintf("| Parent ID | %s |\n", mdEscape(page.ParentID)))
+		fmt.Fprintf(&sb, "| Parent ID | %s |\n", mdEscape(page.ParentID))
 	}
 	if page.ParentType != "" {
-		sb.WriteString(fmt.Sprintf("| Parent Type | %s |\n", mdEscape(page.ParentType)))
+		fmt.Fprintf(&sb, "| Parent Type | %s |\n", mdEscape(page.ParentType))
 	}
 	if page.AuthorID != "" {
-		sb.WriteString(fmt.Sprintf("| Author ID | %s |\n", mdEscape(page.AuthorID)))
+		fmt.Fprintf(&sb, "| Author ID | %s |\n", mdEscape(page.AuthorID))
 	}
 	if page.CreatedAt != "" {
-		sb.WriteString(fmt.Sprintf("| Created | %s |\n", mdEscape(page.CreatedAt)))
+		fmt.Fprintf(&sb, "| Created | %s |\n", mdEscape(page.CreatedAt))
 	}
 	if page.Version != nil {
-		sb.WriteString(fmt.Sprintf("| Version | %d |\n", page.Version.Number))
+		fmt.Fprintf(&sb, "| Version | %d |\n", page.Version.Number)
 		if page.Version.CreatedAt != "" {
-			sb.WriteString(fmt.Sprintf("| Version Date | %s |\n", mdEscape(page.Version.CreatedAt)))
+			fmt.Fprintf(&sb, "| Version Date | %s |\n", mdEscape(page.Version.CreatedAt))
 		}
 	}
 	if page.Links != nil && page.Links.WebUI != "" {
-		sb.WriteString(fmt.Sprintf("| Web URL | %s |\n", mdEscape(page.Links.WebUI)))
+		fmt.Fprintf(&sb, "| Web URL | %s |\n", mdEscape(page.Links.WebUI))
 	}
 
 	sb.WriteString("\n")
@@ -112,7 +112,7 @@ func (f *MarkdownFormatter) FormatPages(pages []models.Page) string {
 		}) + "\n")
 	}
 
-	sb.WriteString(fmt.Sprintf("\n_%d page(s) total._\n", len(pages)))
+	fmt.Fprintf(&sb, "\n_%d page(s) total._\n", len(pages))
 	return sb.String()
 }
 
@@ -131,25 +131,25 @@ func (f *MarkdownFormatter) FormatSpace(space *models.Space) string {
 	sb.WriteString("# " + space.Name + "\n\n")
 	sb.WriteString("| Field | Value |\n")
 	sb.WriteString("| --- | --- |\n")
-	sb.WriteString(fmt.Sprintf("| ID | %s |\n", mdEscape(space.ID)))
-	sb.WriteString(fmt.Sprintf("| Key | %s |\n", mdEscape(space.Key)))
-	sb.WriteString(fmt.Sprintf("| Type | %s |\n", mdEscape(space.Type)))
-	sb.WriteString(fmt.Sprintf("| Status | %s |\n", mdEscape(space.Status)))
+	fmt.Fprintf(&sb, "| ID | %s |\n", mdEscape(space.ID))
+	fmt.Fprintf(&sb, "| Key | %s |\n", mdEscape(space.Key))
+	fmt.Fprintf(&sb, "| Type | %s |\n", mdEscape(space.Type))
+	fmt.Fprintf(&sb, "| Status | %s |\n", mdEscape(space.Status))
 
 	if space.HomepageID != "" {
-		sb.WriteString(fmt.Sprintf("| Homepage ID | %s |\n", mdEscape(space.HomepageID)))
+		fmt.Fprintf(&sb, "| Homepage ID | %s |\n", mdEscape(space.HomepageID))
 	}
 	if space.AuthorID != "" {
-		sb.WriteString(fmt.Sprintf("| Author ID | %s |\n", mdEscape(space.AuthorID)))
+		fmt.Fprintf(&sb, "| Author ID | %s |\n", mdEscape(space.AuthorID))
 	}
 	if space.CreatedAt != "" {
-		sb.WriteString(fmt.Sprintf("| Created | %s |\n", mdEscape(space.CreatedAt)))
+		fmt.Fprintf(&sb, "| Created | %s |\n", mdEscape(space.CreatedAt))
 	}
 	if space.Description != nil && space.Description.Plain != nil && space.Description.Plain.Value != "" {
-		sb.WriteString(fmt.Sprintf("| Description | %s |\n", mdEscape(mdTruncate(space.Description.Plain.Value, 120))))
+		fmt.Fprintf(&sb, "| Description | %s |\n", mdEscape(mdTruncate(space.Description.Plain.Value, 120)))
 	}
 	if space.Links != nil && space.Links.WebUI != "" {
-		sb.WriteString(fmt.Sprintf("| Web URL | %s |\n", mdEscape(space.Links.WebUI)))
+		fmt.Fprintf(&sb, "| Web URL | %s |\n", mdEscape(space.Links.WebUI))
 	}
 
 	sb.WriteString("\n")
@@ -180,7 +180,7 @@ func (f *MarkdownFormatter) FormatSpaces(spaces []models.Space) string {
 		}) + "\n")
 	}
 
-	sb.WriteString(fmt.Sprintf("\n_%d space(s) total._\n", len(spaces)))
+	fmt.Fprintf(&sb, "\n_%d space(s) total._\n", len(spaces))
 	return sb.String()
 }
 
@@ -199,7 +199,7 @@ func (f *MarkdownFormatter) FormatSearchResults(results *models.SearchResult) st
 
 	var sb strings.Builder
 
-	sb.WriteString(fmt.Sprintf("**%d result(s) found**\n\n", results.TotalSize))
+	fmt.Fprintf(&sb, "**%d result(s) found**\n\n", results.TotalSize)
 
 	sb.WriteString(mdRow([]string{"Title", "Space", "Excerpt"}) + "\n")
 	sb.WriteString(mdSeparator(3) + "\n")
@@ -286,7 +286,7 @@ func (f *MarkdownFormatter) FormatAttachments(attachments []models.Attachment) s
 		}) + "\n")
 	}
 
-	sb.WriteString(fmt.Sprintf("\n_%d attachment(s) total._\n", len(attachments)))
+	fmt.Fprintf(&sb, "\n_%d attachment(s) total._\n", len(attachments))
 	return sb.String()
 }
 

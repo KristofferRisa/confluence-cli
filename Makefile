@@ -1,7 +1,8 @@
-.PHONY: build build-all clean test install fmt lint tidy
+.PHONY: build build-all clean test install uninstall fmt lint tidy
 
-BINARY=confluence
+BINARY=cfluence
 DIST=dist
+PREFIX=$(HOME)/.local
 
 VERSION=$(shell git describe --tags --always --dirty 2>/dev/null || echo "dev")
 GIT_COMMIT=$(shell git rev-parse HEAD 2>/dev/null || echo "unknown")
@@ -13,10 +14,16 @@ LDFLAGS=-ldflags "-s -w \
 	-X github.com/kristofferrisa/confluence-cli/internal/commands.BuildDate=$(BUILD_DATE)"
 
 build:
-	go build $(LDFLAGS) -o $(BINARY) ./cmd/confluence
+	go build $(LDFLAGS) -o $(BINARY) ./cmd/cfluence
 
-install:
-	go install $(LDFLAGS) ./cmd/confluence
+install: build
+	mkdir -p $(PREFIX)/bin
+	cp $(BINARY) $(PREFIX)/bin/$(BINARY)
+	@echo "Installed $(BINARY) to $(PREFIX)/bin/$(BINARY)"
+
+uninstall:
+	rm -f $(PREFIX)/bin/$(BINARY)
+	@echo "Removed $(PREFIX)/bin/$(BINARY)"
 
 test:
 	go test -v ./...
@@ -24,15 +31,15 @@ test:
 build-all: build-linux build-darwin build-windows
 
 build-linux:
-	GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o $(DIST)/$(BINARY)-linux-amd64 ./cmd/confluence
-	GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o $(DIST)/$(BINARY)-linux-arm64 ./cmd/confluence
+	GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o $(DIST)/$(BINARY)-linux-amd64 ./cmd/cfluence
+	GOOS=linux GOARCH=arm64 go build $(LDFLAGS) -o $(DIST)/$(BINARY)-linux-arm64 ./cmd/cfluence
 
 build-darwin:
-	GOOS=darwin GOARCH=amd64 go build $(LDFLAGS) -o $(DIST)/$(BINARY)-darwin-amd64 ./cmd/confluence
-	GOOS=darwin GOARCH=arm64 go build $(LDFLAGS) -o $(DIST)/$(BINARY)-darwin-arm64 ./cmd/confluence
+	GOOS=darwin GOARCH=amd64 go build $(LDFLAGS) -o $(DIST)/$(BINARY)-darwin-amd64 ./cmd/cfluence
+	GOOS=darwin GOARCH=arm64 go build $(LDFLAGS) -o $(DIST)/$(BINARY)-darwin-arm64 ./cmd/cfluence
 
 build-windows:
-	GOOS=windows GOARCH=amd64 go build $(LDFLAGS) -o $(DIST)/$(BINARY)-windows-amd64.exe ./cmd/confluence
+	GOOS=windows GOARCH=amd64 go build $(LDFLAGS) -o $(DIST)/$(BINARY)-windows-amd64.exe ./cmd/cfluence
 
 clean:
 	rm -f $(BINARY)

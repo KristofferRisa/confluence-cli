@@ -16,7 +16,7 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "confluence",
+	Use:   "cfluence",
 	Short: "Confluence CLI - Manage Confluence pages with markdown",
 	Long: `A command-line tool for managing Confluence Cloud pages using markdown files.
 

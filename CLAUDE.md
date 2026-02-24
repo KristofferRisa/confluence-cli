@@ -5,7 +5,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Build & Test Commands
 
 ```bash
-make build          # Build binary to ./confluence
+make build          # Build binary to ./cfluence
+make install        # Install to ~/.local/bin/cfluence
+make uninstall      # Remove from ~/.local/bin
 make test           # Run all tests
 make fmt            # Format code
 make lint           # Run golangci-lint

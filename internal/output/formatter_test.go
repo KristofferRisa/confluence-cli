@@ -15,12 +15,12 @@ import (
 
 func samplePage() *models.Page {
 	return &models.Page{
-		ID:       "123456",
-		Status:   "current",
-		Title:    "Getting Started",
-		SpaceID:  "SPACE001",
-		ParentID: "100000",
-		AuthorID: "user-abc",
+		ID:        "123456",
+		Status:    "current",
+		Title:     "Getting Started",
+		SpaceID:   "SPACE001",
+		ParentID:  "100000",
+		AuthorID:  "user-abc",
 		CreatedAt: "2024-01-15T10:00:00.000Z",
 		Version: &models.Version{
 			Number:    3,

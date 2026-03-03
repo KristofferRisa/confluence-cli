@@ -75,4 +75,3 @@ func init() {
 	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", fmt.Sprintf("config file path (default %q)", config.DefaultConfigPath()))
 	rootCmd.PersistentFlags().StringVarP(&formatFlag, "format", "f", "", "output format: pretty, json, markdown")
 }
-

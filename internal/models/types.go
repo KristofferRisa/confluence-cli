@@ -63,11 +63,11 @@ type Label struct {
 
 // Attachment represents a file attached to a page (v1 API)
 type Attachment struct {
-	ID         string          `json:"id"`
-	Type       string          `json:"type"`
-	Title      string          `json:"title"`
-	Metadata   AttachmentMeta  `json:"metadata,omitempty"`
-	Extensions AttachmentExt   `json:"extensions,omitempty"`
+	ID         string           `json:"id"`
+	Type       string           `json:"type"`
+	Title      string           `json:"title"`
+	Metadata   AttachmentMeta   `json:"metadata,omitempty"`
+	Extensions AttachmentExt    `json:"extensions,omitempty"`
 	Links      *AttachmentLinks `json:"_links,omitempty"`
 }
 

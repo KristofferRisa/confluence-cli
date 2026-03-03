@@ -27,13 +27,13 @@ type PrettyFormatter struct{}
 // helpers
 // --------------------------------------------------------------------------
 
-func bold(s string) string    { return colorBold + s + colorReset }
-func cyan(s string) string    { return colorCyan + s + colorReset }
-func blue(s string) string    { return colorBlue + s + colorReset }
-func yellow(s string) string  { return colorYellow + s + colorReset }
-func green(s string) string   { return colorGreen + s + colorReset }
-func red(s string) string     { return colorRed + s + colorReset }
-func dim(s string) string     { return colorDim + s + colorReset }
+func bold(s string) string   { return colorBold + s + colorReset }
+func cyan(s string) string   { return colorCyan + s + colorReset }
+func blue(s string) string   { return colorBlue + s + colorReset }
+func yellow(s string) string { return colorYellow + s + colorReset }
+func green(s string) string  { return colorGreen + s + colorReset }
+func red(s string) string    { return colorRed + s + colorReset }
+func dim(s string) string    { return colorDim + s + colorReset }
 
 // statusBadge returns a coloured status string.
 func statusBadge(status string) string {
@@ -94,7 +94,7 @@ func (f *PrettyFormatter) FormatPage(page *models.Page) string {
 	var sb strings.Builder
 
 	sb.WriteString("\n")
-	sb.WriteString(bold("  \U0001F4C4 " + page.Title) + "\n")
+	sb.WriteString(bold("  \U0001F4C4 "+page.Title) + "\n")
 	sb.WriteString(strings.Repeat("─", 60) + "\n")
 
 	sb.WriteString(field("ID", page.ID))
@@ -172,7 +172,7 @@ func (f *PrettyFormatter) FormatSpace(space *models.Space) string {
 	var sb strings.Builder
 
 	sb.WriteString("\n")
-	sb.WriteString(bold("  \U0001F4DA " + space.Name) + "\n")
+	sb.WriteString(bold("  \U0001F4DA "+space.Name) + "\n")
 	sb.WriteString(strings.Repeat("─", 60) + "\n")
 
 	sb.WriteString(field("ID", space.ID))

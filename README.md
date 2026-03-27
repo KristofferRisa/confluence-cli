@@ -1,11 +1,11 @@
-# Confluence CLI
+# cfluence
 
 A command-line tool for managing Confluence Cloud pages using markdown files.
 
 <p align="center">
-  <img src="https://img.shields.io/github/v/release/kristofferrisa/confluence-cli" alt="Release">
-  <img src="https://img.shields.io/github/actions/workflow/status/kristofferrisa/confluence-cli/test.yml" alt="Tests">
-  <img src="https://img.shields.io/github/license/kristofferrisa/confluence-cli" alt="License">
+  <img src="https://img.shields.io/github/v/release/kristofferrisa/cfluence-cli" alt="Release">
+  <img src="https://img.shields.io/github/actions/workflow/status/kristofferrisa/cfluence-cli/test.yml" alt="Tests">
+  <img src="https://img.shields.io/github/license/kristofferrisa/cfluence-cli" alt="License">
 </p>
 
 ## Features
@@ -21,15 +21,15 @@ A command-line tool for managing Confluence Cloud pages using markdown files.
 
 ### Download Binary
 
-Download the latest release for your platform from [Releases](https://github.com/kristofferrisa/confluence-cli/releases).
+Download the latest release for your platform from [Releases](https://github.com/kristofferrisa/cfluence-cli/releases).
 
 ### Build from Source
 
 ```bash
-git clone https://github.com/kristofferrisa/confluence-cli.git
-cd confluence-cli
+git clone https://github.com/kristofferrisa/cfluence-cli.git
+cd cfluence-cli
 make build
-./confluence --help
+./cfluence --help
 ```
 
 ## Quick Start
@@ -38,17 +38,17 @@ make build
 
 2. **Run setup wizard:**
    ```bash
-   confluence config init
+   cfluence config init
    ```
 
 3. **Pull a page as markdown:**
    ```bash
-   confluence page pull 123456 -o my-page.md
+   cfluence page pull 123456 -o my-page.md
    ```
 
 4. **Edit the markdown file, then push:**
    ```bash
-   confluence page push my-page.md
+   cfluence page push my-page.md
    ```
 
 ## Markdown File Format
@@ -94,18 +94,18 @@ We need a way to manage Confluence pages as code...
 export CONFLUENCE_BASE_URL="https://mycompany.atlassian.net"
 export CONFLUENCE_EMAIL="user@company.com"
 export CONFLUENCE_TOKEN="your-api-token"
-confluence page list --space ENG
+cfluence page list --space ENG
 ```
 
 **Option 2: Config file**
 ```bash
-confluence config init  # Interactive setup
+cfluence config init  # Interactive setup
 # or manually edit ~/.confluence/config.yaml
 ```
 
 **Option 3: Command flags**
 ```bash
-confluence --config /path/to/config.yaml page list
+cfluence --config /path/to/config.yaml page list
 ```
 
 ### Commands
@@ -114,97 +114,97 @@ confluence --config /path/to/config.yaml page list
 
 ```bash
 # Push a markdown file to Confluence (creates or updates)
-confluence page push my-page.md
+cfluence page push my-page.md
 
 # Push multiple files
-confluence page push docs/*.md
+cfluence page push docs/*.md
 
 # Pull a page as markdown
-confluence page pull 123456 -o my-page.md
+cfluence page pull 123456 -o my-page.md
 
 # Get page info
-confluence page get 123456
+cfluence page get 123456
 
 # List pages in a space
-confluence page list --space ENG
+cfluence page list --space ENG
 
 # List pages with filtering
-confluence page list --space ENG --status current --limit 25
+cfluence page list --space ENG --status current --limit 25
 
 # Show page hierarchy as a tree
-confluence page tree --space ENG
+cfluence page tree --space ENG
 
 # Delete a page
-confluence page delete 123456
+cfluence page delete 123456
 ```
 
 #### Spaces
 
 ```bash
 # List all accessible spaces
-confluence space list
+cfluence space list
 
 # Get space details
-confluence space get ENG
+cfluence space get ENG
 ```
 
 #### Search
 
 ```bash
 # Search with CQL
-confluence search "type=page AND space=ENG AND title~\"architecture\""
+cfluence search "type=page AND space=ENG AND title~\"architecture\""
 
 # Simple text search
-confluence search "deployment guide" --space ENG
+cfluence search "deployment guide" --space ENG
 ```
 
 #### Labels
 
 ```bash
 # Add labels to a page
-confluence label add 123456 architecture design-doc
+cfluence label add 123456 architecture design-doc
 
 # List labels on a page
-confluence label list 123456
+cfluence label list 123456
 
 # Remove a label
-confluence label remove 123456 draft
+cfluence label remove 123456 draft
 ```
 
 #### Attachments
 
 ```bash
 # Upload an attachment to a page
-confluence attachment upload 123456 diagram.png
+cfluence attachment upload 123456 diagram.png
 
 # List attachments on a page
-confluence attachment list 123456
+cfluence attachment list 123456
 
 # Download an attachment
-confluence attachment download att789012 -o diagram.png
+cfluence attachment download att789012 -o diagram.png
 ```
 
 #### Configuration
 
 ```bash
 # Interactive setup wizard
-confluence config init
+cfluence config init
 
 # Show current configuration
-confluence config show
+cfluence config show
 
 # Set a single value
-confluence config set space ENG
-confluence config set format json
+cfluence config set space ENG
+cfluence config set format json
 
 # Show config file path
-confluence config path
+cfluence config path
 ```
 
 #### Version
 
 ```bash
-confluence version
+cfluence version
 ```
 
 ### Output Formats
@@ -213,12 +213,12 @@ Default output is colored CLI. Change format with `--format`:
 
 **JSON** (for scripting/piping):
 ```bash
-confluence page list --space ENG --format json | jq '.[].title'
+cfluence page list --space ENG --format json | jq '.[].title'
 ```
 
 **Markdown** (for documentation):
 ```bash
-confluence page get 123456 --format markdown
+cfluence page get 123456 --format markdown
 ```
 
 ## Configuration File
@@ -235,7 +235,7 @@ format: "pretty"          # Options: pretty, json, markdown
 
 View current config:
 ```bash
-confluence config show
+cfluence config show
 ```
 
 ## Typical Workflows
@@ -247,25 +247,25 @@ Keep your Confluence docs in a git repo and push on merge:
 ```bash
 # In your CI pipeline
 for f in docs/*.md; do
-  confluence page push "$f"
+  cfluence page push "$f"
 done
 ```
 
 ### Pull, Edit, Push
 
 ```bash
-confluence page pull 123456 -o design.md
+cfluence page pull 123456 -o design.md
 # Edit design.md in your favorite editor
-confluence page push design.md
+cfluence page push design.md
 ```
 
 ### Bulk Export
 
 ```bash
 # Export all pages in a space
-confluence page list --space ENG --format json | \
+cfluence page list --space ENG --format json | \
   jq -r '.[].id' | \
-  xargs -I{} confluence page pull {} -o "pages/{}.md"
+  xargs -I{} cfluence page pull {} -o "pages/{}.md"
 ```
 
 ## API Information
@@ -279,7 +279,7 @@ confluence page list --space ENG --format json | \
 ## Troubleshooting
 
 **"No API token found"**
-- Set `CONFLUENCE_TOKEN` environment variable or run `confluence config init`
+- Set `CONFLUENCE_TOKEN` environment variable or run `cfluence config init`
 
 **"401 Unauthorized"**
 - Verify your email and API token are correct

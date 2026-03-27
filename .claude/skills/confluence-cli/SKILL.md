@@ -1,5 +1,5 @@
 ---
-name: confluence-cli
+name: cfluence-cli
 description: >-
   Assists with using the cfluence CLI tool for managing Confluence Cloud pages
   via markdown files. Use when the user asks about Confluence, cfluence commands,
@@ -11,7 +11,7 @@ allowed-tools: Read Grep Glob Bash(cfluence *)
 metadata:
   author: kristofferrisa
   version: "1.0"
-  repository: https://github.com/kristofferrisa/confluence-cli
+  repository: https://github.com/kristofferrisa/cfluence-cli
 compatibility: Requires cfluence binary installed (Go CLI). Works on Linux, macOS, Windows.
 ---
 

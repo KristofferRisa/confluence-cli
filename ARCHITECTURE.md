@@ -1,4 +1,4 @@
-# Confluence CLI Architecture
+# cfluence Architecture
 
 A cross-platform CLI tool for managing Confluence Cloud pages using markdown files, built following Unix philosophy.
 
@@ -13,9 +13,9 @@ A cross-platform CLI tool for managing Confluence Cloud pages using markdown fil
 ## Directory Structure
 
 ```
-confluence-cli/
+cfluence-cli/
 ├── cmd/
-│   └── confluence/
+│   └── cfluence/
 │       └── main.go              # Entry point, command registration
 ├── internal/
 │   ├── api/
@@ -33,13 +33,13 @@ confluence-cli/
 │   │   └── attachments_test.go  # Attachment endpoint tests
 │   ├── commands/
 │   │   ├── root.go              # Root command, global flags
-│   │   ├── version.go           # `confluence version`
-│   │   ├── config.go            # `confluence config` - init/show/set/path
-│   │   ├── page.go              # `confluence page` - push/pull/get/list/delete/tree
-│   │   ├── space.go             # `confluence space` - list/get
-│   │   ├── search.go            # `confluence search`
-│   │   ├── label.go             # `confluence label` - add/list/remove
-│   │   └── attachment.go        # `confluence attachment` - upload/list/download
+│   │   ├── version.go           # `cfluence version`
+│   │   ├── config.go            # `cfluence config` - init/show/set/path
+│   │   ├── page.go              # `cfluence page` - push/pull/get/list/delete/tree
+│   │   ├── space.go             # `cfluence space` - list/get
+│   │   ├── search.go            # `cfluence search`
+│   │   ├── label.go             # `cfluence label` - add/list/remove
+│   │   └── attachment.go        # `cfluence attachment` - upload/list/download
 │   ├── config/
 │   │   ├── config.go            # Configuration loading
 │   │   └── config_test.go       # Config priority tests
@@ -74,7 +74,7 @@ confluence-cli/
 
 ## Component Overview
 
-### Entry Point (`cmd/confluence/main.go`)
+### Entry Point (`cmd/cfluence/main.go`)
 
 Minimal entry point following Go conventions:
 
@@ -524,7 +524,7 @@ PLATFORMS := linux/amd64 linux/arm64 darwin/amd64 darwin/arm64 windows/amd64
 build-all:
     @for platform in $(PLATFORMS); do \
         GOOS=$${platform%/*} GOARCH=$${platform#*/} \
-        go build -o dist/confluence-$${platform%/*}-$${platform#*/} ./cmd/confluence; \
+        go build -o dist/cfluence-$${platform%/*}-$${platform#*/} ./cmd/cfluence; \
     done
 ```
 
